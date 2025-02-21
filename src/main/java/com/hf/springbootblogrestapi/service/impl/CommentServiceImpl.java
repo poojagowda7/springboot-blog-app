@@ -4,7 +4,7 @@ import com.hf.springbootblogrestapi.DTOS.CommentDTO;
 import com.hf.springbootblogrestapi.entity.Comment;
 import com.hf.springbootblogrestapi.entity.Post;
 import com.hf.springbootblogrestapi.exception.ResourceNotFoundException;
-import com.hf.springbootblogrestapi.exception.blogApiException;
+import com.hf.springbootblogrestapi.exception.BlogApiException;
 import com.hf.springbootblogrestapi.repository.CommentRepository;
 import com.hf.springbootblogrestapi.repository.PostRepository;
 import com.hf.springbootblogrestapi.service.CommentService;
@@ -72,7 +72,7 @@ public class CommentServiceImpl implements CommentService {
         Post post = postRepository.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post", "Id", postId));
         Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new ResourceNotFoundException("Comment", "Id", commentId));
         if (!comment.getPost().getId().equals(post.getId())) {
-            throw new blogApiException(HttpStatus.BAD_REQUEST, "Comment Doesn't belong to Post");
+            throw new BlogApiException(HttpStatus.BAD_REQUEST, "Comment Doesn't belong to Post");
         }
         return comment;
     }

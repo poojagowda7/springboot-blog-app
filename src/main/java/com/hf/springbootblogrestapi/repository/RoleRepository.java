@@ -1,11 +1,11 @@
 package com.hf.springbootblogrestapi.repository;
 
-import com.hf.springbootblogrestapi.entity.ROLE;
+import com.hf.springbootblogrestapi.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface RoleRepository extends JpaRepository<ROLE,Long> {
+public interface RoleRepository extends JpaRepository<Role,Long> {
 
-    Optional<ROLE> findByROLE_NAME(String name);
+    Optional<Role> findByRoleName(String name);
 }

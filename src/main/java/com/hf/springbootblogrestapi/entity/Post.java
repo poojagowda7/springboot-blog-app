@@ -17,9 +17,9 @@ import java.util.Set;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     @Column(unique = true,nullable = false,name = "title")
-    private String Title;
+    private String title;
     @Column(nullable = false)
     private String description ;
     @Column(nullable = false)

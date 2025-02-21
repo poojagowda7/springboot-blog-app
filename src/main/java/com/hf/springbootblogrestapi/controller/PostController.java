@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @RestController()
@@ -23,8 +24,13 @@ public class PostController {
     @PostMapping
     public ResponseEntity<PostDTO> createPost(@Valid @RequestBody PostDTO postDTO){
         return   new ResponseEntity<>(postService.creatPost(postDTO), HttpStatus.CREATED);
-
     }
+
+    @PostMapping("bulk")
+    public ResponseEntity<List<PostDTO>> createMultiplePosts(@Valid @RequestBody List<PostDTO> postDTOs) {
+        return new ResponseEntity<>(postService.createMultiplePosts(postDTOs), HttpStatus.CREATED);
+    }
+
     @GetMapping
     public PostResponse getallposts(@RequestParam(value = "pageNo",required = false,defaultValue = Constants.DEFAULT_PAGE_NUMBER) int pageNo,
                                     @RequestParam(value = "pageSize",required = false,defaultValue = Constants.DEFAULT_PAGE_SIZE) int pageSize,
@@ -32,11 +38,11 @@ public class PostController {
                                     @RequestParam(value = "sortDir",required = false,defaultValue = Constants.DEFAULT_SORT_DIRECTION)String sortDir){
         return postService.getAllPosts(pageNo,pageSize,sortBy,sortDir);
     }
-    @GetMapping("{Id}")
-    public ResponseEntity<PostDTO> getPostById(@PathVariable(name = "Id") long Id){
+    @GetMapping("{id}")
+    public ResponseEntity<PostDTO> getPostById(@PathVariable(name = "id") long Id){
         return ResponseEntity.ok(postService.getPostbyId(Id));
     }
-    @PutMapping("{Id}")
+    @PutMapping("{id}")
     public ResponseEntity<PostDTO> updatePostbyId(@Valid @RequestBody  PostDTO postDTO,@PathVariable long Id){
         PostDTO postDTO1 = postService.UpdatePostById(Id,postDTO);
         return new ResponseEntity<>(postDTO1,HttpStatus.OK);

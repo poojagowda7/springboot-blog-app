@@ -32,7 +32,15 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public  List<PostDTO> createMultiplePosts(List<PostDTO> postDTOs) {
+        return postRepository.saveAll(
+                postDTOs.stream()
+                .map(this::mapToEntity).toList()
+                ).stream()
+                .map(this::mapToDTO).toList();
+    }
 
+    @Override
     public PostResponse getAllPosts(int pageNo, int pageSize,String sortBy,String sortDir) {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name())?Sort.by(sortBy).ascending():Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(pageNo,pageSize, sort);

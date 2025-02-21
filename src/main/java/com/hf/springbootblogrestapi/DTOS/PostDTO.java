@@ -7,12 +7,12 @@ import java.util.Set;
 
 @Data
 public class PostDTO {
-    private Long Id;
+    private Long id;
     @NotEmpty
     @Size(min = 4,message = "Post Title Should have at least 4 Characters")
-    private String Title;
+    private String title;
     @NotEmpty
-    @Size(min = 10,message = "Post Title Should have at least 4 Characters")
+    @Size(min = 10,message = "Post Description Should have at least 4 Characters")
     private String description ;
     @NotEmpty
     private String content;
